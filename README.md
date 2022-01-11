@@ -1,4 +1,5 @@
 Ảnh gốc được lưu tại Folder: Image
+
 Ảnh được mã hóa và được giải mã lưu tại Image_cipher và Image_plain
 Hàm XOR-AES dùng để mã hóa 
 

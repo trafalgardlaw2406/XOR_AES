@@ -20,7 +20,7 @@ def de_AES_img_key(img, key_hex):
     del l1
     l4 = list(itertools.chain(*l3))
     del l3
-    print(l4)
+    # print(l4)
     img_plain_txt = "Image_txt_plain\\imgkey_plain.txt"
     f = open(img_plain_txt, 'w+')
     count = 0
@@ -28,7 +28,7 @@ def de_AES_img_key(img, key_hex):
         if(count == 512):
             f.write("\n")
             count = 0
-        x = str(l4[i],encoding='utf-8')
+        x = str(l4[i])
         count = count+1
         f.write(x)
         f.write("\t")

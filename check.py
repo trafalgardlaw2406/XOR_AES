@@ -2,6 +2,8 @@ import os, os.path
 import cv2
 import pandas as pd
 import itertools
+from AES import en_AES
+from aes_init import aes_init
 # path = "Image\\0003"
 # listim = os.listdir(path)
 # print(listim)
@@ -39,8 +41,13 @@ import itertools
 # l3 = list(itertools.chain(*l1))
 # print(l3[2:])
 
-x = [i for i in range(9) if i!= 3]
-print(x)
+# x = [i for i in range(9) if i!= 3]
+# print(x)
 
-y = "avdsfsdf.txt"
-print(y[2:-4])
+# y = "avdsfsdf.txt"
+# print(y[2:-4])
+key = ['FF', '11', '12', '25', '99', 'F0', 'AB', '1C', '4F', '11', '14', '42', '01', '68', '97', '01']
+[s_box, inv_s_box, w, poly_mat, inv_poly_mat] = aes_init(key)
+l = "FF123"
+a = en_AES(l,s_box, inv_s_box, w, poly_mat, inv_poly_mat)
+print(a)

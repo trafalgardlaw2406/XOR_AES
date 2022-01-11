@@ -1,1 +1,1 @@
-  begin_en = time.time()
+print(f"PSNR value is {value} dB") 

@@ -46,8 +46,6 @@ from aes_init import aes_init
 
 # y = "avdsfsdf.txt"
 # print(y[2:-4])
-key = ['FF', '11', '12', '25', '99', 'F0', 'AB', '1C', '4F', '11', '14', '42', '01', '68', '97', '01']
-[s_box, inv_s_box, w, poly_mat, inv_poly_mat] = aes_init(key)
-l = "FF123"
-a = en_AES(l,s_box, inv_s_box, w, poly_mat, inv_poly_mat)
-print(a)
+
+s = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+print(s[:0])

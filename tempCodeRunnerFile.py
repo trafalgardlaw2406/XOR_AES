@@ -1,1 +1,1 @@
-print(f"PSNR value is {value} dB") 
+    return (a,b)

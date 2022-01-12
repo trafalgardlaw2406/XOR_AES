@@ -1,18 +1,24 @@
+from numpy.core.fromnumeric import shape
 from en_AES_img_key import en_AES_img_key
 from enc_xor_img import xor_img
 from de_AES_img_key import de_AES_img_key
 import os
 import time
+from get_shape import get_shape
 from read_img import read_img
 from gen_random import gen_random
+from get_shape import get_shape
+
 class xor_aes:
     def __init__(self,x,key,id):
         self.key = key
         self.id = id
         self.x = x
+    
     def encrypt(self):
+        (m,n) = get_shape(self.x)
         # img_key = "Image_txt\\"+ self.x + "_"+ str(self.id) + ".txt" # choose 1 frame as key img
-        gen_random(512,512) # gen a random img
+        gen_random(m,n) # gen a random img
         img_key = "Image_txt\\random_key.txt"
         en_AES_img_key(img_key,self.key)
         files = os.listdir("Image_txt")
@@ -24,8 +30,8 @@ class xor_aes:
             xorIm = xor_img(img_key,img_notkey[i])
             img_txt2_cipher = "Image_txt_cipher\\" + self.x + "_" + str(i+1) + "_cipher.txt"
             f = open(img_txt2_cipher, 'w+')
-            for i in range(512*512):
-                if(count == 512):
+            for i in range(m*n):
+                if(count == n):
                     f.write("\n")
                     count = 0
                 a = str(xorIm[i])
@@ -34,6 +40,7 @@ class xor_aes:
                 f.write("\t")
             f.close()
     def decrypt(self):
+        (m,n) = get_shape(self.x)
         img_key = "Image_txt_cipher\\img_keycipher.txt"
         de_AES_img_key(img_key, self.key)
         imgkey_plain = "Image_txt_plain\\imgkey_plain.txt"
@@ -44,8 +51,8 @@ class xor_aes:
             plainIm = xor_img(imgkey_plain,imgNotkey[i])
             img_plain_txt = "Image_txt_plain\\" + self.x + "_" + str(i+1) + "_plain.txt"
             file = open(img_plain_txt, 'w+')
-            for i in range(512*512):
-                if(count == 512):
+            for i in range(m*n):
+                if(count == n):
                     file.write("\n")
                     count = 0
                 a = str(plainIm[i])
@@ -58,11 +65,11 @@ if __name__ == "__main__":
     # read_img(nameFolder)
     key = ['FF', '11', '12', '25', '99', 'F0', 'AB', '1C', '4F', '11', '14', '42', '01', '68', '97', '01']
     s = xor_aes(nameFolder, key , 1) # choose pic 1 as key
-    # begin_en = time.time()
-    # s.encrypt()
-    # end_en = time.time()
-    # print("Time to encrypt: ", end_en - begin_en)
-    begin_de = time.time()
-    s.decrypt()
-    end_de = time.time()
-    print("Time to decrypt: ", end_de - begin_de)
+    begin_en = time.time()
+    s.encrypt()
+    end_en = time.time()
+    print("Time to encrypt: ", end_en - begin_en)
+    # begin_de = time.time()
+    # s.decrypt()
+    # end_de = time.time()
+    # print("Time to decrypt: ", end_de - begin_de)
